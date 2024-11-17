@@ -5,7 +5,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Copy, Check } from 'lucide-react';
+import { Loader2, Copy, Check, Link } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from "@/components/ui/label";
 
 const RequirementsComparison: React.FC = () => {
   const [githubUrl, setGithubUrl] = useState('');
@@ -14,6 +16,7 @@ const RequirementsComparison: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [originalReqs, setOriginalReqs] = useState('');
   const [fixedReqs, setFixedReqs] = useState('');
+  const [userErrorMessage, setUserErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +31,8 @@ const RequirementsComparison: React.FC = () => {
         },
         body: JSON.stringify({
           url: githubUrl,
-          file_path: 'requirements.txt'
+          file_path: 'requirements.txt',
+          error_message: userErrorMessage || undefined
         }),
       });
   
@@ -67,13 +71,32 @@ const RequirementsComparison: React.FC = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              placeholder="Enter GitHub repository URL"
-              value={githubUrl}
-              onChange={(e) => setGithubUrl(e.target.value)}
-              className="w-full"
-            />
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="github-url">GitHub Repository URL</Label>
+              <div className="relative">
+                <Link className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="github-url"
+                  placeholder="https://github.com/username/repository"
+                  value={githubUrl}
+                  onChange={(e) => setGithubUrl(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="error-message">Error Message (Optional)</Label>
+              <Textarea
+                id="error-message"
+                placeholder="Paste any error messages you're encountering..."
+                value={userErrorMessage}
+                onChange={(e) => setUserErrorMessage(e.target.value)}
+                className="min-h-[100px] resize-y"
+              />
+            </div>
+
             <Button 
               type="submit" 
               className="w-full"
