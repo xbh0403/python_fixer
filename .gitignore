@@ -1,0 +1,46 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/requirements-fixer/node_modules
+/requirements-fixer/.pnp
+/requirements-fixer/.pnp.*
+/requirements-fixer/.yarn/*
+!/requirements-fixer/.yarn/patches
+!/requirements-fixer/.yarn/plugins
+!/requirements-fixer/.yarn/releases
+!/requirements-fixer/.yarn/versions
+
+# testing
+/requirements-fixer/coverage
+/.pytest_cache
+
+# next.js
+/requirements-fixer/.next/
+/requirements-fixer/out/
+
+# production
+/requirements-fixer/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+/requirements-fixer/npm-debug.log*
+/requirements-fixer/yarn-debug.log*
+/requirements-fixer/yarn-error.log*
+
+# env files
+.env*
+
+# vercel
+/requirements-fixer/.vercel
+
+# typescript
+/requirements-fixer/*.tsbuildinfo
+/requirements-fixer/next-env.d.ts
+
+# python
+/venv
+__pycache__/
+*.py[cod]
