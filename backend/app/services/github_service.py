@@ -7,7 +7,7 @@ class GitHubService:
     def __init__(self):
         self.temp_dir = tempfile.mkdtemp()
 
-    async def get_repository_info(self, repo_url: str, file_path: str = "requirements.txt"):
+    async def get_repository_info(self, repo_url: str, file_path: str = "requirements.txt", error_message: str | None = None):
         try:
             # Clone the repository
             repo = Repo.clone_from(repo_url, self.temp_dir)
@@ -48,7 +48,8 @@ class GitHubService:
                 "requirements": requirements_content,
                 "initial_date": initial_date.isoformat(),
                 "imports": list(imports),
-                "files": python_files
+                "files": python_files,
+                "error_message": error_message
             }
 
         finally:

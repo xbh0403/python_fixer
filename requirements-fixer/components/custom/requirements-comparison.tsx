@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Copy, Check } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
 
 const RequirementsComparison: React.FC = () => {
   const [githubUrl, setGithubUrl] = useState('');
@@ -14,6 +15,7 @@ const RequirementsComparison: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [originalReqs, setOriginalReqs] = useState('');
   const [fixedReqs, setFixedReqs] = useState('');
+  const [userErrorMessage, setUserErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +30,8 @@ const RequirementsComparison: React.FC = () => {
         },
         body: JSON.stringify({
           url: githubUrl,
-          file_path: 'requirements.txt'
+          file_path: 'requirements.txt',
+          error_message: userErrorMessage || undefined
         }),
       });
   
@@ -73,6 +76,12 @@ const RequirementsComparison: React.FC = () => {
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
               className="w-full"
+            />
+            <Textarea
+              placeholder="Optional: Paste any error messages you're encountering (if any)"
+              value={userErrorMessage}
+              onChange={(e) => setUserErrorMessage(e.target.value)}
+              className="w-full h-32"
             />
             <Button 
               type="submit" 
