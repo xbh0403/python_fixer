@@ -41,6 +41,9 @@
 /requirements-fixer/next-env.d.ts
 
 # python
-/venv
-__pycache__/
-*.py[cod]
+/backend/venv
+/backend/**/**/__pycache__/
+/backend/**/__pycache__/
+/backend/__pycache__/
+/backend/**/*.py[cod]
+/backend/.pytest_cache

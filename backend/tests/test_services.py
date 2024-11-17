@@ -1,6 +1,6 @@
 import pytest
 import sys
-sys.path.append("/Users/xbh0403/Desktop/websites/backend")
+sys.path.append("/Users/xbh0403/Desktop/python_fixer/backend")
 from app.services.github_service import GitHubService
 from app.services.ai_service import AIService
 import os
